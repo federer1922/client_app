@@ -1,13 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <p class="font-weight-bold">Contact type</p>
+    </div>
+    <div class="col-sm-2">
+      <p class="font-weight-bold">Name</p>
+    </div>
+    <div class="col-sm-2">
+      <p class="font-weight-bold">Phone number</p>
+    </div>
+    <div class="col-sm-3">
+      <p class="font-weight-bold">Email/ Webesite</p>
+    </div>
+  </div>
+</div>
 <div class="container"> 
   <% @contacts.each do |contact| %>
     <div class="row"> 
       <div class="col-sm-2">
-        <%= contact["name"] %>
-      </div>
-      <div class="col-sm-2">
         <%= contact["contact_type"] %>
       </div>
-    </div>
-    
+      <div class="col-sm-2">
+        <%= contact["name"] %> <%= contact["lastname"] %> 
+      </div>
+      <div class="col-sm-2">
+        <% if contact["contact_type"] == "person" %>
+          <%= contact["means_of_contact"]["mobile"].join("") %>
+        <% elsif contact["contact_type"] == "company" %>
+          <%= contact["means_of_contact"]["phone"].join("") %>
+        <% end %>
+      </div>
+      <div class="col-sm-3">
+        <% if contact["contact_type"] == "person" %>
+          <%= contact["means_of_contact"]["email"].join("") %>
+        <% elsif contact["contact_type"] == "company" %>
+          <%= contact["means_of_contact"]["website"].join("") %> 
+        <% end %>
+      </div>
+    </div>  
   <% end %>
 </div> 
