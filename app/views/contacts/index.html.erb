@@ -2,11 +2,12 @@
   <% @contacts.each do |contact| %>
     <div class="row"> 
       <div class="col-sm-2">
-        <%= contact... %>
+        <%= contact["name"] %>
       </div>
       <div class="col-sm-2">
-        <%= contact... %>
+        <%= contact["contact_type"] %>
       </div>
     </div>
+    
   <% end %>
 </div> 
