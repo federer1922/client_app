@@ -1,9 +1,42 @@
 <div class="container">
   <div class="row">
+    <div class="col">
+      <form action="/create_contact" >
+      <input type="hidden" name="type" value="<%= "person" %>">
+        <label for="name">  <p class="font-weight-bold">Add person to contact list</p> </label><br>
+        <input type="string" class="form-control" name="name" placeholder="Enter first name">
+        <p></p>
+        <input type="string" class="form-control" name="lastname" placeholder="Enter last name">
+        <p></p>
+        <input type="string" class="form-control" name="mobile" placeholder="Enter mobile number">
+        <p></p>
+        <input type="string" class="form-control" name="email" placeholder="Enter email">
+        <p></p>
+        <button type="submit" style="float: right;" class="btn btn-info">Submit</button>
+      </form>
+    </div>   
+    <div class="col">
+      <form action="/create_contact" >
+        <label for="name">  <p class="font-weight-bold">Add company to contact list</p> </label><br>
+        <input type="string" class="form-control" name="name" placeholder="Enter company name">
+        <p></p>
+        <input type="string" class="form-control" name="phone" placeholder="Enter phone number">
+        <p></p>
+        <input type="string" class="form-control" name="website" placeholder="Enter website adress">
+        <p></p>
+        <button type="submit" style="float: right;" class="btn btn-info">Submit</button>
+      </form>
+    </div>   
+  </div>
+</div>
+<p></p>
+
+<div class="container">
+  <div class="row">
     <div class="col-sm-2">
       <p class="font-weight-bold">Contact type</p>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <p class="font-weight-bold">Name</p>
     </div>
     <div class="col-sm-2">
@@ -20,7 +53,7 @@
       <div class="col-sm-2">
         <%= contact["contact_type"] %>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <%= contact["name"] %> <%= contact["lastname"] %> 
       </div>
       <div class="col-sm-2">
@@ -40,11 +73,11 @@
     </div>  
   <% end %>
     <p></p>
-      <div class="col-md-auto">
-        <form class="form-inline" method="GET" style="display: inline;">
-          <input type="hidden" name="page_token" value="<%= @next_page_token %>">
-          <button type="submit" style="float: right;" class="btn btn-success btn-sm">Next page</button>
-        </form>
-      </div>
+    <div class="col">
+      <form class="form-inline" method="GET" style="display: inline;">
+        <input type="hidden" name="page_token" value="<%= @next_page_token %>">
+        <button type="submit" style="float: right;" class="btn btn-success">Next page</button>
+      </form>
+    </div>
 
 </div> 

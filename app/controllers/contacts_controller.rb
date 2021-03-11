@@ -15,26 +15,21 @@ class ContactsController < ApplicationController
 
   def create
 
-  https://#companyname#.scoro.com/api/contacts/modify 
+    new_contact = HTTP.post("https://arek.scoro.com/api/v2/contacts/modify", json:
 {
-    "apiKey": "API_hash",
-    "lang": "eng",
-    "company_account_id": "tutorial",
+    "apiKey": "ScoroAPI_a4e5e6ad85ecdcc",
+    "company_account_id": "arek",
     "request": {
-        "name": "Testing 123",
-        "lastname": "",
-        "bankaccount": null,
-        "birthday": "0000-00-00",
+        "contact_type": params["type"],
+        "name": params["name"],
+        "lastname": params["lastname"],
+        "means_of_contact": {"mobile"=>[params["mobile"]], "email"=>[params["email"]], "phone"=>[params["phone"]], "website"=>[params["website"]]},
+        "birthday": "",
         "position": "",
         "comments": "",
-        "sex": null,
-        "id_code": null,
-        "is_client": null,
-        "is_supplier": null,
-        "vatno": null
+        "sex": "",
     }
-}
-
+})
 
     redirect_to action: "index"
   end
