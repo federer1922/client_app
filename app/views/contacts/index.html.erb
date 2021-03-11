@@ -25,18 +25,26 @@
       </div>
       <div class="col-sm-2">
         <% if contact["contact_type"] == "person" %>
-          <%= contact["means_of_contact"]["mobile"].join("") %>
+          <%= contact.dig("means_of_contact", "mobile")&.join("") %>
         <% elsif contact["contact_type"] == "company" %>
-          <%= contact["means_of_contact"]["phone"].join("") %>
+          <%= contact.dig("means_of_contact", "phone")&.join("") %>
         <% end %>
       </div>
       <div class="col-sm-3">
         <% if contact["contact_type"] == "person" %>
-          <%= contact["means_of_contact"]["email"].join("") %>
+          <%= contact.dig("means_of_contact", "email")&.join("") %>
         <% elsif contact["contact_type"] == "company" %>
-          <%= contact["means_of_contact"]["website"].join("") %> 
+          <%= contact.dig("means_of_contact", "website")&.join("") %> 
         <% end %>
       </div>
     </div>  
   <% end %>
+    <p></p>
+      <div class="col-md-auto">
+        <form class="form-inline" method="GET" style="display: inline;">
+          <input type="hidden" name="page_token" value="<%= @next_page_token %>">
+          <button type="submit" style="float: right;" class="btn btn-success btn-sm">Next page</button>
+        </form>
+      </div>
+
 </div> 
