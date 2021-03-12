@@ -70,6 +70,12 @@
           <%= contact.dig("means_of_contact", "website")&.join("") %> 
         <% end %>
       </div>
+      <div class="col-md-auto">
+        <form class="form-inline" action="/delete_contact" style="display: inline;">
+          <input type="hidden" name="id" value="<%= contact["contact_id"] %>">
+          <button type="submit" class="btn btn-outline-dark btn-sm">Delete contact</button>
+        </form>
+      </div>
     </div>  
   <% end %>
     <p></p>

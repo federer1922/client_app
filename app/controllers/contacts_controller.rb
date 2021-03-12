@@ -27,4 +27,12 @@ class ContactsController < ApplicationController
 
     redirect_to action: "index"
   end
+
+  def delete
+    result = HTTP.delete("http://localhost:3000/contacts", json: { "id": params["id"] })
+
+    redirect_to action: "index"
+  end
+
+
 end

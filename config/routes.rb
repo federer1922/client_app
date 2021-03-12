@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   root to: "contacts#index"
   get "/create_contact", to: "contacts#create"
+  get "/delete_contact", to: "contacts#delete"
 
 end
