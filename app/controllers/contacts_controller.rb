@@ -6,30 +6,24 @@ class ContactsController < ApplicationController
       page_token = nil
     end
 
-    result = HTTP.get("http://localhost:3000/contacts", json: { page_token: page_token })
+    connector_response = HTTP.get("http://localhost:3000/contacts", json: { page_token: page_token })
 
-    result_json = MultiJson.load(result.body.to_s)
-    @next_page_token = result_json["next_page_token"]
-    @contacts = result_json["data"]   
+    connector_result = MultiJson.load(connector_response.body.to_s) 
+    @next_page_token = connector_result["next_page_token"]
+    @contacts = connector_result["data"]   
   end
 
   def create
-
-    new_contact = HTTP.post("https://arek.scoro.com/api/v2/contacts/modify", json:
+    result = HTTP.post("http://localhost:3000/contacts", json:
 {
-    "apiKey": "ScoroAPI_a4e5e6ad85ecdcc",
-    "company_account_id": "arek",
-    "request": {
-        "contact_type": params["type"],
+        "type": params["type"],
         "name": params["name"],
         "lastname": params["lastname"],
-        "means_of_contact": {"mobile"=>[params["mobile"]], "email"=>[params["email"]], "phone"=>[params["phone"]], "website"=>[params["website"]]},
-        "birthday": "",
-        "position": "",
-        "comments": "",
-        "sex": "",
-    }
-})
+        "mobile": params["mobile"],
+        "email": params["email"],
+        "phone": params["phone"],
+        "website": params["website"]
+    })
 
     redirect_to action: "index"
   end
