@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <p class="font-weight-bold">Contact type</p>
+    </div>
+    <div class="col-sm-2">
+      <p class="font-weight-bold">Name</p>
+    </div>
+    <div class="col-sm-2">
+      <p class="font-weight-bold">Phone number</p>
+    </div>
+    <div class="col-sm-3">
+      <p class="font-weight-bold">Email/ Webesite</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <%= @contact["contact_type"] %>
+    </div>
+    <div class="col-sm-2">
+      <%= @contact["name"] %> <%= @contact["lastname"] %> 
+    </div>
+    <div class="col-sm-2">
+      <%= @contact.dig("means_of_contact", "mobile")&.join("") %> <%= @contact.dig("means_of_contact", "phone")&.join("") %>
+    </div>
+    <div class="col-sm-3">
+      <%= @contact.dig("means_of_contact", "email")&.join("") %> <%= @contact.dig("means_of_contact", "website")&.join("") %> 
+    </div>
+  </div>
+</div>

@@ -14,25 +14,26 @@ class ContactsController < ApplicationController
   end
 
   def create
-    result = HTTP.post("http://localhost:3000/contacts", json:
-{
-        "type": params["type"],
-        "name": params["name"],
-        "lastname": params["lastname"],
-        "mobile": params["mobile"],
-        "email": params["email"],
-        "phone": params["phone"],
-        "website": params["website"]
-    })
+    connector_response = HTTP.post("http://localhost:3000/contacts", json: { "type": params["type"], "name": params["name"], "lastname": params["lastname"], "mobile": params["mobile"], "email": params["email"], "phone": params["phone"], "website": params["website"] })
 
     redirect_to action: "index"
   end
 
   def delete
-    result = HTTP.delete("http://localhost:3000/contacts", json: { "id": params["id"] })
+    connector_response = HTTP.delete("http://localhost:3000/contacts", json: { "id": params["id"] })
 
     redirect_to action: "index"
   end
+
+  def show
+    connector_response = HTTP.get("http://localhost:3000/contacts/#{params['id']}", json: { "id": params["id"] })
+
+    result = MultiJson.load(connector_response.body.to_s) 
+    
+    @contact = result["data"]
+  end
+
+
 
 
 end

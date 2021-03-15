@@ -36,7 +36,7 @@
     <div class="col-sm-2">
       <p class="font-weight-bold">Contact type</p>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <p class="font-weight-bold">Name</p>
     </div>
     <div class="col-sm-2">
@@ -53,7 +53,7 @@
       <div class="col-sm-2">
         <%= contact["contact_type"] %>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
         <%= contact["name"] %> <%= contact["lastname"] %> 
       </div>
       <div class="col-sm-2">
@@ -70,11 +70,12 @@
           <%= contact.dig("means_of_contact", "website")&.join("") %> 
         <% end %>
       </div>
-      <div class="col-md-auto">
+      <div class="col-sm-auto">
         <form class="form-inline" action="/delete_contact" style="display: inline;">
           <input type="hidden" name="id" value="<%= contact["contact_id"] %>">
           <button type="submit" class="btn btn-outline-dark btn-sm">Delete contact</button>
         </form>
+        <%= link_to "Show contact", view_contact_path(id: contact["contact_id"]), method: "get", class: "btn btn-primary", target: "_blank" %>    
       </div>
     </div>  
   <% end %>
