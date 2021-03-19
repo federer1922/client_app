@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
       page_token = nil
     end
 
-    connector_response = HTTP.get("http://localhost:3000/contacts", json: { page_token: page_token })
+    connector_response = HTTP.basic_auth(:user => "arek", :pass => "secret").get("http://localhost:3000/contacts", json: { page_token: page_token })
 
     connector_result = MultiJson.load(connector_response.body.to_s) 
     @next_page_token = connector_result["next_page_token"]
@@ -14,23 +14,23 @@ class ContactsController < ApplicationController
   end
 
   def create
-    connector_response = HTTP.post("http://localhost:3000/contacts", json: { "type": params["type"], "name": params["name"], "lastname": params["lastname"], "mobile": params["mobile"], "email": params["email"], "phone": params["phone"], "website": params["website"] })
+    connector_response = HTTP.basic_auth(:user => "arek", :pass => "secret").post("http://localhost:3000/contacts", json: { "type": params["type"], "name": params["name"], "lastname": params["lastname"], "mobile": params["mobile"], "email": params["email"], "phone": params["phone"], "website": params["website"] })
 
     redirect_to action: "index"
   end
 
   def delete
-    connector_response = HTTP.delete("http://localhost:3000/contacts", json: { "id": params["id"] })
+    connector_response = HTTP.basic_auth(:user => "arek", :pass => "secret").delete("http://localhost:3000/contacts", json: { "id": params["id"] })
 
     redirect_to action: "index"
   end
 
   def show
-    connector_response = HTTP.get("http://localhost:3000/contacts/#{params['id']}", json: { "id": params["id"] })
+    connector_response = HTTP.basic_auth(:user => "arek", :pass => "secret").get("http://localhost:3000/contacts/#{params['id']}", json: { "id": params["id"] })
 
-    result = MultiJson.load(connector_response.body.to_s) 
+    connector_result = MultiJson.load(connector_response.body.to_s) 
     
-    @contact = result["data"]
+    @contact = connector_result
   end
 
 
